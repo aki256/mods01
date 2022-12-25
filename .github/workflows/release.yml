@@ -19,7 +19,7 @@ jobs:
   
       - run: |
           cd ./mods
-          zip mods.zip ./*.jar
+          zip ../mods.zip ./*.jar
           
       - uses: actions/create-release@master
         id: create_release # ファイルアップロードに outputs の値を使用するため ID が必要
