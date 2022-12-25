@@ -18,7 +18,7 @@ jobs:
         run: echo "CURRENT_DATETIME=$(date +'%Y/%m/%d %H:%M:%S')" >> $GITHUB_ENV
   
       - run: |
-          zip mods.zip ./mods
+          zip mods.zip ./mods/*.jar
           
       - uses: actions/create-release@master
         id: create_release # ファイルアップロードに outputs の値を使用するため ID が必要
@@ -42,14 +42,4 @@ jobs:
           # 添付ファイルの表示名 (必須)
           asset_name: mods.zip
           # 添付ファイルに対応する content-type (必須)
-          asset_content_type: application/zip
-          
-      - uses: actions/upload-release-asset@master
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./mods.zip
-          asset_name: mods.zip
           asset_content_type: application/zip
